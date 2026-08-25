@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Verity.FluxoCaixa.Api/Verity.FluxoCaixa.Api.csproj" />
+    <Project Path="src/Verity.FluxoCaixa.Aplicacao/Verity.FluxoCaixa.Aplicacao.csproj" />
+    <Project Path="src/Verity.FluxoCaixa.Dominio/Verity.FluxoCaixa.Dominio.csproj" />
+    <Project Path="src/Verity.FluxoCaixa.Infraestrutura/Verity.FluxoCaixa.Infraestrutura.csproj" />
+  </Folder>
+</Solution>
