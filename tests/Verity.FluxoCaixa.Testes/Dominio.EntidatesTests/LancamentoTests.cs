@@ -1,7 +1,7 @@
 ﻿using Verity.FluxoCaixa.Dominio.Entidades;
 using Verity.FluxoCaixa.Dominio.Enums;
 
-namespace Verity.FluxoCaixa.Testes;
+namespace Verity.FluxoCaixa.Testes.EntidatesTests;
 
 public class LancamentoTests
 {
