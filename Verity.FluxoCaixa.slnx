@@ -5,4 +5,7 @@
     <Project Path="src/Verity.FluxoCaixa.Dominio/Verity.FluxoCaixa.Dominio.csproj" />
     <Project Path="src/Verity.FluxoCaixa.Infraestrutura/Verity.FluxoCaixa.Infraestrutura.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Verity.FluxoCaixa.Testes/Verity.FluxoCaixa.Testes.csproj" />
+  </Folder>
 </Solution>
