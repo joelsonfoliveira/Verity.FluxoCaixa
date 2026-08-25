@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ProjectReference Include="..\Verity.FluxoCaixa.Aplicacao\Verity.FluxoCaixa.Aplicacao.csproj" />
     <ProjectReference Include="..\Verity.FluxoCaixa.Dominio\Verity.FluxoCaixa.Dominio.csproj" />
@@ -18,5 +17,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 </Project>

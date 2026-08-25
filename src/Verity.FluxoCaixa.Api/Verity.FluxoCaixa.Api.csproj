@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -8,6 +7,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
 
@@ -15,5 +18,4 @@
     <ProjectReference Include="..\Verity.FluxoCaixa.Aplicacao\Verity.FluxoCaixa.Aplicacao.csproj" />
     <ProjectReference Include="..\Verity.FluxoCaixa.Infraestrutura\Verity.FluxoCaixa.Infraestrutura.csproj" />
   </ItemGroup>
-
 </Project>

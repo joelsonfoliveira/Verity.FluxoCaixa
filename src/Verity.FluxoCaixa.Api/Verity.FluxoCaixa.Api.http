@@ -1,6 +1,30 @@
 @Verity.FluxoCaixa.Api_HostAddress = http://localhost:5250
+@date = DateTime.Now.ToString("yyyy-MM-dd")
 
-GET {{Verity.FluxoCaixa.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### Criar um lançamento de crédito
+POST {{Verity.FluxoCaixa.Api_HostAddress}}/api/lancamentos
+Content-Type: application/json
 
-###
+{
+  "data": "{{date}}",
+  "valor": 150.00,
+  "tipo": 1,
+  "descricao": "Venda de produto"
+}
+
+### Criar um lançamento de débito
+POST {{Verity.FluxoCaixa.Api_HostAddress}}/api/lancamentos
+Content-Type: application/json
+
+{
+  "data": "{{date}}",
+  "valor": 40.50,
+  "tipo": 2,
+  "descricao": "Pagamento de fornecedor"
+}
+
+### Listar lançamentos de uma data
+GET {{Verity.FluxoCaixa.Api_HostAddress}}/api/lancamentos?data={{date}}
+
+### Consultar o saldo consolidado do dia
+GET {{Verity.FluxoCaixa.Api_HostAddress}}/api/saldo-diario/{{date}}
