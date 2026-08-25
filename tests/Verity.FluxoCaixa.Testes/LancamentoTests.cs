@@ -24,7 +24,10 @@ public class LancamentoTests
 
     [Theory]
     [InlineData(0)]
+    [InlineData(-0.01)]
+    [InlineData(-1)]
     [InlineData(-10)]
+    [InlineData(-100.5)]
     public void DeveRejeitarValorMenorOuIgualZero(decimal valor)
     {
         Assert.Throws<ArgumentException>(() =>
