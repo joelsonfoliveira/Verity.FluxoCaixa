@@ -4,12 +4,12 @@ namespace Verity.FluxoCaixa.Dominio.Entidades;
 
 public class Lancamento
 {
-    public Guid Id { get; set; }
-    public DateOnly Data { get; set; }
-    public decimal Valor { get; set; }
-    public TipoLancamento Tipo { get; set; }
-    public string Descricao { get; set; } = string.Empty;
-    public DateTime CriadoEm { get; set; }
+    public Guid Id { get; private set; }
+    public DateOnly Data { get; private set; }
+    public decimal Valor { get; private set; }
+    public TipoLancamento Tipo { get; private set; }
+    public string Descricao { get; private set; } = string.Empty;
+    public DateTime CriadoEm { get; private set; }
 
     private Lancamento() { }
 
