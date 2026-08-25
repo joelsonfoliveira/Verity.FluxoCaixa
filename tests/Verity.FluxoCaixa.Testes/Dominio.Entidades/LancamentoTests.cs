@@ -39,4 +39,19 @@ public class LancamentoTests
             )
         );
     }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(null)]
+    public void DeveAceitarLancamentoSemDescricao(string? descricao)
+    {
+        var lancamento = new Lancamento(
+            DateOnly.FromDateTime(DateTime.Today),
+            100m,
+            TipoLancamento.Credito,
+            descricao!
+        );
+
+        Assert.Equal(descricao, lancamento.Descricao);
+    }
 }
