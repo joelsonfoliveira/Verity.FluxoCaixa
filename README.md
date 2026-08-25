@@ -124,8 +124,6 @@ curl --location 'https://localhost:7030/api/saldo-diario/2026-08-25' \
 
 > `tipo: 1` = Crédito, `tipo: 2` = Débito (ver `TipoLancamento`).
 
-Esses mesmos exemplos estão prontos no arquivo [`Verity.FluxoCaixa.Api.http`](src/Verity.FluxoCaixa.Api/Verity.FluxoCaixa.Api.http), que pode ser executado direto do Visual Studio ou importado no Postman.
-
 ## Visualizando os dados
 
 O banco é um arquivo Sqlite comum, em `src/Verity.FluxoCaixa.Api/fluxo-caixa.db`. Para inspecionar:
@@ -156,7 +154,17 @@ O projeto de testes (`tests/Verity.FluxoCaixa.Testes`) usa **xUnit** + **Moq**, 
 
 ## Requisitos não funcionais
 
-Dado o prazo do desafio, optei por simplificar: **o saldo é sempre calculado de forma síncrona, direto dos lançamentos, sem um processo de consolidação separado.** Isso atende ao requisito de forma indireta, embora não demonstre em código o cenário de tolerância a picos com perda controlada descrito no desafio.
+O desafio pede que o serviço de lançamentos continue operante mesmo se a consolidação diária falhar, e que a consolidação tolere até 5% de perda em picos de 50 requisições/segundo.
+
+Dado o prazo do desafio, optei por simplificar: **o saldo é sempre calculado de forma síncrona, direto dos lançamentos, sem um processo de consolidação separado.** Como não existe um "sistema de consolidação" independente, não há o que falhar separadamente do serviço de lançamentos — mas essa simplificação não demonstra em código o cenário de tolerância a picos com perda controlada descrito no desafio.
+
+**Se o volume de leitura do saldo justificasse otimizar isso em produção**, a abordagem seria:
+
+1. Lançamentos continuam sendo gravados de forma síncrona e imediata (fonte da verdade) — a escrita nunca depende da consolidação.
+2. Após gravar, publicar um sinal assíncrono e não-bloqueante ("recalcular saldo do dia X") numa fila limitada, com uma política de descarte controlado quando estiver cheia (ex.: `BoundedChannelFullMode.DropWrite` em memória, ou o equivalente no broker escolhido) — é isso que atenderia à tolerância de até 5% de perda em picos, sem nunca bloquear a escrita do lançamento.
+3. Um worker em background consome essa fila e recalcula o saldo do dia de forma idempotente (pode reprocessar quantas vezes for preciso, sempre chegando ao mesmo resultado), persistindo um saldo pré-calculado.
+4. A leitura do saldo usa esse valor pré-calculado quando disponível; se ainda não existir (worker atrasado ou indisponível), calcula na hora a partir dos lançamentos como fallback — garantindo que a consulta nunca fique bloqueada esperando a consolidação.
+5. Em produção, a fila seria um broker externo (RabbitMQ, Kafka ou Azure Service Bus) em vez de uma fila em memória, permitindo múltiplas instâncias da API e persistência das mensagens entre reinicializações.
 
 ## Possíveis melhorias futuras
 
