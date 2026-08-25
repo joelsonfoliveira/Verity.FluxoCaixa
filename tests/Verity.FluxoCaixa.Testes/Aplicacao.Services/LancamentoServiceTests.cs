@@ -5,7 +5,7 @@ using Verity.FluxoCaixa.Aplicacao.Servicos;
 using Verity.FluxoCaixa.Dominio.Entidades;
 using Verity.FluxoCaixa.Dominio.Enums;
 
-namespace Verity.FluxoCaixa.Testes.Aplicacao.Servicos;
+namespace Verity.FluxoCaixa.Testes.Aplicacao.Services;
 
 public class LancamentoServiceTests
 {
